@@ -8,7 +8,7 @@ fn main() {
     }
 
     match args[1].as_str() {
-        "1" => day1::solve(),
+        "1" => day1::run(),
         _ => eprintln!("Day not implemented"),
     }
 }
