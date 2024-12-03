@@ -2,13 +2,7 @@ use std::collections::HashMap;
 
 type Matrix = Vec<Vec<u32>>;
 
-fn read_input(file: &str) -> String {
-    std::fs::read_to_string(file).expect("Failed to read input file")
-}
-
-pub fn run() {
-    let input = read_input("inputs/day1.txt");
-
+pub fn run(input: String) {
     println!("Distance sum: {}", solve_sum_distances(&input));
     println!("Similarity: {}", solve_similarity(&input));
 }

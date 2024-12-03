@@ -2,15 +2,64 @@ type Level = i32;
 type Report = Vec<Level>;
 type Reports = Vec<Report>;
 
-fn read_input(file: &str) -> String {
-    std::fs::read_to_string(file).expect("Failed to read input file")
-}
-
-pub fn run() {
-    let input = read_input("inputs/day2.txt");
-
+pub fn run(input: String) {
     println!("Part 1: {}", part1(&input));
     println!("Part 2: {}", part2(&input));
+}
+
+pub fn parse_reports(input: &str) -> Reports {
+    input.lines().map(|line| parse_report(line)).collect()
+}
+
+pub fn parse_report(input: &str) -> Report {
+    input
+        .split_whitespace()
+        .map(|text| text.parse::<Level>().expect("Invalid number"))
+        .collect()
+}
+
+#[derive(Copy, Clone, Debug, PartialEq)]
+pub enum Direction {
+    Increasing,
+    Decreasing,
+}
+
+pub fn is_safe(report: &Report) -> bool {
+    if report.is_empty() {
+        return true;
+    }
+
+    let mut direction: Option<Direction> = None;
+
+    for (index, level) in report.iter().enumerate().skip(1) {
+        let previous_level = report[index - 1];
+        if direction == None && *level != previous_level {
+            if *level > previous_level {
+                direction = Some(Direction::Increasing);
+            } else {
+                direction = Some(Direction::Decreasing);
+            };
+        }
+
+        if previous_level == *level {
+            return false;
+        }
+
+        if !check(previous_level, *level, direction.unwrap()) {
+            return false;
+        }
+    }
+
+    true
+}
+
+pub fn check(first: Level, second: Level, direction: Direction) -> bool {
+    let threshold = 3;
+
+    match direction {
+        Direction::Increasing => return first < second && (first - second).abs() <= threshold,
+        Direction::Decreasing => return first > second && (first - second).abs() <= threshold,
+    }
 }
 
 pub fn part1(input: &str) -> u32 {
@@ -42,65 +91,6 @@ pub fn part2(input: &str) -> u32 {
         })
         .filter(|&safe| safe)
         .count() as u32
-}
-
-pub fn parse_report(input: &str) -> Report {
-    input
-        .split_whitespace()
-        .map(|text| text.parse::<Level>().expect("Invalid number"))
-        .collect()
-}
-
-pub fn parse_reports(input: &str) -> Reports {
-    input.lines().map(|line| parse_report(line)).collect()
-}
-
-#[derive(Copy, Clone, Debug, PartialEq)]
-pub enum Direction {
-    Increasing,
-    Decreasing,
-}
-
-pub fn is_safe(report: &Report) -> bool {
-    if report.is_empty() {
-        return true;
-    }
-
-    let mut previous_level: Option<Level> = None;
-    let mut direction: Option<Direction> = None;
-
-    for level in report {
-        if direction == None && previous_level != None && *level != previous_level.unwrap() {
-            if *level > previous_level.unwrap() {
-                direction = Some(Direction::Increasing);
-            } else {
-                direction = Some(Direction::Decreasing);
-            };
-        }
-
-        if previous_level != None {
-            if previous_level.unwrap() == *level {
-                return false;
-            }
-
-            if !check(previous_level.unwrap(), *level, direction.unwrap()) {
-                return false;
-            }
-        }
-
-        previous_level = Some(*level);
-    }
-
-    true
-}
-
-pub fn check(first: Level, second: Level, direction: Direction) -> bool {
-    let threshold = 3;
-
-    match direction {
-        Direction::Increasing => return first < second && (first - second).abs() <= threshold,
-        Direction::Decreasing => return first > second && (first - second).abs() <= threshold,
-    }
 }
 
 #[cfg(test)]
