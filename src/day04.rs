@@ -204,9 +204,7 @@ fn found_match_part2(grid: &Vec<Vec<Character>>, position: &Position) -> bool {
 mod tests {
     use super::*;
 
-    #[test]
-    fn test_part1() {
-        let test_input = "MMMSXXMASM
+    const TEST_INPUT: &str = "MMMSXXMASM
 MSAMXMSMSA
 AMXSXMAAMM
 MSAMASMSMX
@@ -217,22 +215,13 @@ SAXAMASAAA
 MAMMMXMMMM
 MXMXAXMASX";
 
-        assert_eq!(solve_part1(&test_input), 18);
+    #[test]
+    fn test_part1() {
+        assert_eq!(solve_part1(&TEST_INPUT), 18);
     }
 
     #[test]
     fn test_part2() {
-        let test_input = "MMMSXXMASM
-MSAMXMSMSA
-AMXSXMAAMM
-MSAMASMSMX
-XMASAMXAMM
-XXAMMXXAMA
-SMSMSASXSS
-SAXAMASAAA
-MAMMMXMMMM
-MXMXAXMASX";
-
-        assert_eq!(solve_part2(&test_input), 9);
+        assert_eq!(solve_part2(&TEST_INPUT), 9);
     }
 }

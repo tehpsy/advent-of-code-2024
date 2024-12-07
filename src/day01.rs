@@ -72,27 +72,20 @@ fn count_occurrences(numbers: &[u32]) -> HashMap<u32, usize> {
 mod tests {
     use super::*;
 
-    #[test]
-    fn test_part1() {
-        let test_input = "3   4
+    const TEST_INPUT: &str = "3   4
 4   3
 2   5
 1   3
 3   9
 3   3";
 
-        assert_eq!(solve_sum_distances(&test_input), 11);
+    #[test]
+    fn test_part1() {
+        assert_eq!(solve_sum_distances(&TEST_INPUT), 11);
     }
 
     #[test]
     fn test_part2() {
-        let test_input = "3   4
-4   3
-2   5
-1   3
-3   9
-3   3";
-
-        assert_eq!(solve_similarity(&test_input), 31);
+        assert_eq!(solve_similarity(&TEST_INPUT), 31);
     }
 }

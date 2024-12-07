@@ -15,17 +15,15 @@ pub fn solve_part2(_input: &str) -> u32 {
 mod tests {
     use super::*;
 
+    const TEST_INPUT: &str = "";
+
     #[test]
     fn test_part1() {
-        let test_input = "";
-
-        assert_eq!(solve_part1(&test_input), 0);
+        assert_eq!(solve_part1(TEST_INPUT), 0);
     }
 
     #[test]
     fn test_part2() {
-        let test_input = "";
-
-        assert_eq!(solve_part2(&test_input), 0);
+        assert_eq!(solve_part2(TEST_INPUT), 0);
     }
 }

@@ -97,27 +97,20 @@ pub fn part2(input: &str) -> u32 {
 mod tests {
     use super::*;
 
+    const TEST_INPUT: &str = "7 6 4 2 1
+1 2 7 8 9
+9 7 6 2 1
+1 3 2 4 5
+8 6 4 4 1
+1 3 6 7 9";
+
     #[test]
     fn test_part1() {
-        let test_input = "7 6 4 2 1
-         1 2 7 8 9
-         9 7 6 2 1
-         1 3 2 4 5
-         8 6 4 4 1
-         1 3 6 7 9";
-
-        assert_eq!(part1(&test_input), 2);
+        assert_eq!(part1(&TEST_INPUT), 2);
     }
 
     #[test]
     fn test_part2() {
-        let test_input = "7 6 4 2 1
-         1 2 7 8 9
-         9 7 6 2 1
-         1 3 2 4 5
-         8 6 4 4 1
-         1 3 6 7 9";
-
-        assert_eq!(part2(&test_input), 4);
+        assert_eq!(part2(&TEST_INPUT), 4);
     }
 }
